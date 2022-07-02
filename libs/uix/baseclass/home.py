@@ -1,4 +1,6 @@
-from main_imports import ImageLeftWidget, MDScreen, TwoLineAvatarListItem
+from kivymd.uix.list import ImageLeftWidget, OneLineListItem
+from kivymd.uix.screen import MDScreen
+
 from libs.applibs import utils
 
 utils.load_kv("home.kv")
@@ -13,12 +15,12 @@ class Home_Screen(MDScreen):
 
         # for dummy search item [------
         
-        twolineW= TwoLineAvatarListItem(text=f"{search_field}",
-            secondary_text=f"@{search_field}")
+        if search_field != "":
+            onelineW= OneLineListItem(text=f"{search_field}")
+            self.ids.search_items.add_widget(onelineW)
 
-        twolineW.add_widget(ImageLeftWidget(source="assets//img//hamster_icon.png"))
         
-        self.ids.search_items.add_widget(twolineW)
+        
         # #  ----- ] end dummy search
     
     

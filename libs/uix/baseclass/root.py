@@ -1,6 +1,6 @@
 from kivy.core.window import Window
+from kivy.uix.screenmanager import ScreenManager
 
-from main_imports import ScreenManager
 from libs.applibs import utils
 
 utils.load_kv("root.kv")
