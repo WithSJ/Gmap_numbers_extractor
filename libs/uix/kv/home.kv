@@ -24,14 +24,31 @@
 
                     MDBoxLayout:
                         adaptive_height: True
-
+                        
+                        
                         MDTextField:
-                            id: search_field
+                            id: region_field
+                            hint_text: 'Region'
+                        
+                        MDTextField:
+                            id: keyword_field
+                            hint_text: 'Key Words'
+                        
+                        MDTextField:
+                            id: code_field
+                            hint_text: 'Country Code'
+                        
+                    MDBoxLayout:
+                        adaptive_height:True
+                        MDTextField:
+                            id: url_field
                             hint_text: 'Search'
+                            mode : "fill"
                         
                         MDIconButton:
                             icon: 'magnify'
-                            on_release: root.search_account(search_field.text)
+                            on_release: root.search_fields(region_field.text,keyword_field.text,code_field.text,url_field.text)
+
 
                     ScrollView:
                         MDList:

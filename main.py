@@ -1,10 +1,11 @@
 #--[Start platform specific code]
 """This code to detect it's Android or not 
 if it's not android than app window size change in android phone size"""
+
+from ctypes import util
 from kivy.utils import platform
 
 from kivymd.app import MDApp
-from kivymd.uix.list import ImageLeftWidget, TwoLineAvatarListItem
 
 if platform != 'android':
     from kivy.config import Config
@@ -23,17 +24,17 @@ Window.softinput_mode = "below_target"
 
 from libs.uix.baseclass.home import Home_Screen
 from libs.uix.baseclass.root import Root
+from libs.applibs import utils
 
 
-
-class HamsterApp(MDApp):
+class GmapEXtApp(MDApp):
     """
-    Hamster App start from here this class is root of app.
+    GmapEXt App start from here this class is root of app.
     in kivy (.kv) file when use app.method_name app is start from here
     """
 
     def __init__(self, **kwargs):
-        super(HamsterApp, self).__init__(**kwargs)
+        super(GmapEXtApp, self).__init__(**kwargs)
         
         self.APP_NAME = "Gmap Extractor"
         self.COMPANY_NAME = ""
@@ -63,7 +64,11 @@ class HamsterApp(MDApp):
         Anything we want to run when start application that code is here.
         """
         self.screen_manager.change_screen("home")
+    
+    def on_stop(self):
+        utils.BackThread.join()
+        utils.ListThread.join()
 
 if __name__ == "__main__":
     # Start application from here.
-    HamsterApp().run() 
+    GmapEXtApp().run() 
