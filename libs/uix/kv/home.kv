@@ -6,7 +6,7 @@
         MDToolbar:
             title: app.APP_NAME
             size_hint: 1,.08
-            right_action_items: [ ["account", lambda x:app.screen_manager.change_screen("profile")]] 
+            right_action_items: [ ["account", lambda x:app.updateList()]] 
             elevation: 5
         
         MDBottomNavigation:
@@ -49,7 +49,20 @@
                             icon: 'magnify'
                             on_release: root.search_fields(region_field.text,keyword_field.text,code_field.text,url_field.text)
 
-
+                                    
+                    MDBoxLayout:
+                        adaptive_height:True
+                        
+                        MDProgressBar:
+                            id: progress_bar
+                            value: 0 
+                            size_hint: .8,None 
+                            pos_hint: {"center_x":.5,"center_y":.5}
+                        
+                        MDIconButton:
+                            icon: 'close'
+                            # on_release: root.search_fields()
+                        
                     ScrollView:
                         MDList:
                             id: search_items

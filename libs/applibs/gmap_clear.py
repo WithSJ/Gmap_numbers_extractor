@@ -16,3 +16,10 @@ def clean_data():
 
     OutputData = sorted(list(set(OutputData)))
     WriteData.writelines(OutputData)
+
+def sort_data():
+    FileData= open(f"{utils.FILENAME}_CleanGmap.csv").readlines()
+    FileData = sorted(list(set(FileData)))
+    open(f"{utils.FILENAME}_CleanGmap.csv","w").writelines(FileData)
+
+    

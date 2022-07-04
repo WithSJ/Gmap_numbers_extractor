@@ -3,7 +3,7 @@ from kivymd.uix.list import  OneLineListItem
 from kivymd.uix.screen import MDScreen
 
 from libs.applibs import utils
-from libs.applibs import gmap_ext
+from libs.applibs import gmap_ext,gmap_clear
 
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
@@ -31,20 +31,23 @@ class Home_Screen(MDScreen):
         gmap_ext.start_scraping(gmap_ext.driver_init(),utils.URL)
 
     def updateList(self):
-        
-        while True:
-            listItem = utils.SEARCH_ITEM
-            for item in listItem:
-                self.ids.search_items.add_widget(
+        with open(f"{utils.FILENAME}_CleanGmap.csv") as FileData:
+            for item in FileData.readlines():
+                    self.ids.search_items.add_widget(
                     OneLineListItem(text=item)
                 )
-            # newlistItem = utils.SEARCH_ITEM
-            # listItem = newlistItem.difference(listItem)
-    
+
+    def progressBar(self):
+        while True:
+            self.ids.progress_bar.value = utils.PROGRESS_VALUE
+            
+
+        
+        
     def search_fields(self,region_field,keyword_field,code_filed,url_field):
         
         utils.BackThread = threading.Thread(target=self.back_processing)
-        # utils.ListThread = threading.Thread(target=self.updateList)
+        utils.ListThread = threading.Thread(target=self.progressBar)
         
         utils.FILENAME = region_field
         utils.REAGION = region_field
@@ -54,8 +57,6 @@ class Home_Screen(MDScreen):
         self.show_alert_dialog()
         utils.BackThread.start()
         utils.ListThread.start()
+            
+
         
-        
-        
-        
-    

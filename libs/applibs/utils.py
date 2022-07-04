@@ -11,7 +11,7 @@ URL = str()
 SEARCH_ITEM = set()
 BackThread=None
 ListThread = None
-
+PROGRESS_VALUE = 0
 def load_kv(file_name, file_path=os.path.join("libs", "uix", "kv")):
     """
     `load_kv` func is used to load a .kv file.
