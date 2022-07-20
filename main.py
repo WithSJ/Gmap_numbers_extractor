@@ -25,6 +25,7 @@ Window.softinput_mode = "below_target"
 from libs.uix.baseclass.home import Home_Screen
 from libs.uix.baseclass.root import Root
 from libs.applibs import utils
+from kivy.clock import Clock
 
 
 class GmapEXtApp(MDApp):
@@ -56,7 +57,10 @@ class GmapEXtApp(MDApp):
         self.theme_cls.theme_style = "Light"
     
         self.screen_manager = Root()
-        self.screen_manager.add_widget(Home_Screen())
+        homeSRC = Home_Screen()
+        Clock.schedule_interval(homeSRC.updateOnClock, 0.1)
+        self.screen_manager.add_widget(homeSRC)
+        
         return self.screen_manager
     
     def on_start(self):
@@ -66,8 +70,9 @@ class GmapEXtApp(MDApp):
         self.screen_manager.change_screen("home")
     
     def on_stop(self):
+        utils.BackThread.killed  = True
         utils.BackThread.join()
-        utils.ListThread.join()
+        # utils.ListThread.join()
 
 if __name__ == "__main__":
     # Start application from here.

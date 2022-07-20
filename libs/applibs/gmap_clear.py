@@ -2,7 +2,7 @@ from libs.applibs import utils
 
 def clean_data():
     FileData= open(f"{utils.FILENAME}_Gmap.csv").readlines()
-    WriteData = open(f"{utils.FILENAME}_CleanGmap.csv","a")
+    WriteData = open(f"{utils.FILENAME}_GmapNumbers.csv","a")
     OutputData = list()
 
     for line in FileData:
@@ -18,8 +18,8 @@ def clean_data():
     WriteData.writelines(OutputData)
 
 def sort_data():
-    FileData= open(f"{utils.FILENAME}_CleanGmap.csv").readlines()
+    FileData= open(f"{utils.FILENAME}_GmapNumbers.csv").readlines()
     FileData = sorted(list(set(FileData)))
-    open(f"{utils.FILENAME}_CleanGmap.csv","w").writelines(FileData)
+    open(f"{utils.FILENAME}_GmapNumbers.csv","w").writelines(FileData)
 
     

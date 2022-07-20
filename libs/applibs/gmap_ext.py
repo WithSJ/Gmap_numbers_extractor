@@ -29,7 +29,8 @@ def scrape(site):
 def start_scraping(driver,url):
     driver.get(url)
     # https://www.google.com/maps/search/toronto++car+dealers/@43.7179846,-79.5181437,11z/data=!3m1!4b1
-    maxValue = 30
+    maxValue = 20
+    maxErr = 2
     for i in range(1,maxValue+1):
         print("Page :: ",i)
         try:
@@ -39,7 +40,7 @@ def start_scraping(driver,url):
             last_ht ,ht = 0,1
             while last_ht != ht:
                 last_ht = ht
-                sleep(1)
+                sleep(2)
                 ht = driver.execute_script("""
                 arguments[0].scrollTo(0,arguments[0].scrollHeight);
                 return arguments[0].scrollHeight;
@@ -49,11 +50,16 @@ def start_scraping(driver,url):
             # gmap_clear.clean_data()
             utils.PROGRESS_VALUE = round((i/maxValue)*100)
             
-            nextBtn = WebDriverWait(driver, 10).until(
-                                    EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div[9]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div/button[2]/img"))
-                                    )
-            nextBtn.click()
+            # nextBtn = WebDriverWait(driver, 10).until(
+            #                         EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div[9]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div/button[2]/img"))
+            #                         )
+            # nextBtn.click()
         except:
+            if maxErr == 0:
+                utils.PROGRESS_VALUE = 100
+                break
+            
+            maxErr -= 1
             continue
     
     driver.close()

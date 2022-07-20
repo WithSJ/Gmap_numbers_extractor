@@ -30,9 +30,6 @@
                             id: region_field
                             hint_text: 'Region'
                         
-                        MDTextField:
-                            id: keyword_field
-                            hint_text: 'Key Words'
                         
                         MDTextField:
                             id: code_field
@@ -47,7 +44,7 @@
                         
                         MDIconButton:
                             icon: 'magnify'
-                            on_release: root.search_fields(region_field.text,keyword_field.text,code_field.text,url_field.text)
+                            on_release: root.search_fields(region_field.text,code_field.text,url_field.text)
 
                                     
                     MDBoxLayout:
@@ -68,3 +65,44 @@
                             id: search_items
               
             
+            MDBottomNavigationItem:
+                name: "wapp_scr"
+                text: f"WApp SEARCH"
+                icon: "magnify"
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(5)
+                    padding: dp(10)
+
+                    MDBoxLayout:
+                        adaptive_height:True
+                        MDFlatButton:
+                            id: wapp_login_btn
+                            text: "WApp Login"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 1, 1 
+                            on_release: root.wapp_login()
+                    MDBoxLayout:
+                        adaptive_height:True
+                        MDTextField:
+                            id: filename_field
+                            hint_text: 'Filename'
+                        
+                        MDIconButton:
+                            icon: 'magnify'
+                            on_release: root.wapp_search(filename_field.text)
+
+                                    
+                    MDBoxLayout:
+                        adaptive_height:True
+                        
+                        MDProgressBar:
+                            id: wapp_progress_bar
+                            value: 0 
+                            size_hint: .8,None 
+                            pos_hint: {"center_x":.5,"center_y":.5}
+                        
+                    ScrollView:
+                        MDList:
+                            id: files_items
