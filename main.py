@@ -70,9 +70,10 @@ class GmapEXtApp(MDApp):
         self.screen_manager.change_screen("home")
     
     def on_stop(self):
-        utils.BackThread.killed  = True
-        utils.BackThread.join()
+        # utils.BackThread.killed  = True
+        # utils.BackThread.join()
         # utils.ListThread.join()
+        pass
 
 if __name__ == "__main__":
     # Start application from here.

@@ -1,3 +1,4 @@
+from fileinput import filename
 from kivymd.uix.list import  OneLineListItem
 from kivymd.uix.screen import MDScreen
 
@@ -97,10 +98,12 @@ class Home_Screen(MDScreen):
         # Whatsapp background working in Thread to check 
         # number on whatsapp or not
         FileData = open(FileName).readlines()
+        print(FileData)
         wapp_check.wapp_search(utils.WAPP_Driver,FileData)
 
     def wapp_search(self,FileName):
         # Whatsapp check btn event
+        print(FileName)
         utils.BackThread = threading.Thread(target=self.wapp_backworking,args=[FileName])
         utils.BackThread.start()
         # Clock.schedule_interval(self.updateOnClock, 0.1)
@@ -110,7 +113,7 @@ class Home_Screen(MDScreen):
         # Login Whatsapp
         utils.WAPP_Driver = wapp_check.driver_init()
         utils.WAPP_Driver.get("https://web.whatsapp.com/")
-
+        
 
     def wapp_login(self):
         #  Login btn event

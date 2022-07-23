@@ -1,12 +1,10 @@
-from ast import Num
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 from libs.applibs import utils,gmap_clear
-from time import sleep
+import time
 
 def driver_init():
     # Selenium Driver init
@@ -19,21 +17,24 @@ def write_data(data1):
 
 
 def wapp_search(driver,NumberList):
+    starttime = time.time()
     i=1
     for item in NumberList:
         try:
             Number = str(item).replace("\n","").replace("+","")
+            # if utils.CODE in Number:
+            #     raise Exception("Not Found")
             driver.get(f"https://web.whatsapp.com/send?phone=%2B{Number}&text&type=phone_number&app_absent=0")
-            
-            NumText = WebDriverWait(driver, 10).until(
+            NumText = WebDriverWait(driver, 20).until(
                                             EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div/div/div[4]/div/header/div[2]/div/div/span"))
                                             )
-            utils.WAPP_PROGRESS_VALUE = round((i/len(NumberList))*100)
+            utils.WAPP_PROGRESS_VALUE = round((i/len(NumberList))) *100
             i+=1
             write_data(str(NumText.text).replace(" ",""))
         except:
             continue
-            
+    endtime = time.time()
+    print("WApp Checking Time in Seconds = ",endtime-starttime)
     # maxValue = 30
     # maxErr = 2
     # for i in range(1,maxValue+1):

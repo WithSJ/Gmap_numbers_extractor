@@ -29,7 +29,7 @@ def scrape(site):
 def start_scraping(driver,url):
     driver.get(url)
     # https://www.google.com/maps/search/toronto++car+dealers/@43.7179846,-79.5181437,11z/data=!3m1!4b1
-    maxValue = 20
+    maxValue = 1
     maxErr = 2
     for i in range(1,maxValue+1):
         print("Page :: ",i)
@@ -40,15 +40,16 @@ def start_scraping(driver,url):
             last_ht ,ht = 0,1
             while last_ht != ht:
                 last_ht = ht
-                sleep(2)
+                sleep(5)
                 ht = driver.execute_script("""
                 arguments[0].scrollTo(0,arguments[0].scrollHeight);
                 return arguments[0].scrollHeight;
                 """,scrollbox)
+                utils.PROGRESS_VALUE = round((last_ht/ht)*100)
 
             scrape(driver.page_source)
             # gmap_clear.clean_data()
-            utils.PROGRESS_VALUE = round((i/maxValue)*100)
+            
             
             # nextBtn = WebDriverWait(driver, 10).until(
             #                         EC.presence_of_element_located((By.XPATH, "/html/body/div[3]/div[9]/div[9]/div/div/div[1]/div[2]/div/div[1]/div/div/div[2]/div[2]/div/div[1]/div/button[2]/img"))
