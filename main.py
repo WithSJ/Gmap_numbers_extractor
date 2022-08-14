@@ -1,6 +1,13 @@
+"""
+Application Devloped by Sandeep Jadam
+Email : withsj.in@gmail.com
+Made in India Software
+
+
+
+"""
+
 #--[Start platform specific code]
-"""This code to detect it's Android or not 
-if it's not android than app window size change in android phone size"""
 
 from ctypes import util
 from kivy.utils import platform
@@ -28,16 +35,16 @@ from libs.applibs import utils
 from kivy.clock import Clock
 
 
-class GmapEXtApp(MDApp):
+class GmapExtApp(MDApp):
     """
     GmapEXt App start from here this class is root of app.
     in kivy (.kv) file when use app.method_name app is start from here
     """
 
     def __init__(self, **kwargs):
-        super(GmapEXtApp, self).__init__(**kwargs)
-        
-        self.APP_NAME = "Gmap Extractor"
+        super(GmapExtApp, self).__init__(**kwargs)
+        self.icon = "Assets\\icon.ico"
+        self.APP_NAME = "Gmap Extractor v1.2.3"
         self.COMPANY_NAME = ""
         
     
@@ -70,11 +77,17 @@ class GmapEXtApp(MDApp):
         self.screen_manager.change_screen("home")
     
     def on_stop(self):
-        # utils.BackThread.killed  = True
-        # utils.BackThread.join()
-        # utils.ListThread.join()
-        pass
+        if utils.BackThread != None:
+            utils.BackThread.killed  = True
+            utils.BackThread.join()
 
 if __name__ == "__main__":
     # Start application from here.
-    GmapEXtApp().run() 
+    try:
+        import pyi_splash
+        pyi_splash.update_text("GMAP UI Loaded...")
+        pyi_splash.close()
+    except:
+        pass
+    GmapExtApp().run()
+    

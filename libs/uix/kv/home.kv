@@ -6,7 +6,6 @@
         MDToolbar:
             title: app.APP_NAME
             size_hint: 1,.08
-            right_action_items: [ ["account", lambda x:app.updateList()]] 
             elevation: 5
         
         MDBottomNavigation:
@@ -14,7 +13,6 @@
             
             MDBottomNavigationItem:
                 name: "search_scr"
-                text: f"SEARCH"
                 icon: "google-maps"
 
                 MDBoxLayout:
@@ -28,23 +26,31 @@
                         
                         MDTextField:
                             id: region_field
-                            hint_text: 'Region'
+                            hint_text: 'Filename'
                         
                         
                         MDTextField:
                             id: code_field
                             hint_text: 'Country Code'
-                        
+
                     MDBoxLayout:
                         adaptive_height:True
+                        MDTextField:
+                            id: filter_field
+                            hint_text: 'Filter (Use , for more numbers)'                
+        
+                    MDBoxLayout:
+                        adaptive_height:True
+        
                         MDTextField:
                             id: url_field
                             hint_text: 'Search'
                             mode : "fill"
                         
+                        
                         MDIconButton:
-                            icon: 'magnify'
-                            on_release: root.search_fields(region_field.text,code_field.text,url_field.text)
+                            icon: 'plus'
+                            on_release: root.addSearchList(region_field.text,code_field.text,url_field.text,filter_field.text)
 
                                     
                     MDBoxLayout:
@@ -53,56 +59,18 @@
                         MDProgressBar:
                             id: progress_bar
                             value: 0 
-                            size_hint: .8,None 
+                            size_hint: .6,None 
                             pos_hint: {"center_x":.5,"center_y":.5}
                         
-                        MDIconButton:
-                            icon: 'close'
-                            # on_release: root.search_fields()
                         
                     ScrollView:
                         MDList:
                             id: search_items
-              
+
+                    MDRaisedButton:
+                        text: "Click to Start"
+                        pos_hint: {"center_x":.5,"center_y":.5}
+                        size_hint: .8,None 
+                        on_release: root.search_fields()
+                        
             
-            MDBottomNavigationItem:
-                name: "wapp_scr"
-                text: f"WApp SEARCH"
-                icon: "magnify"
-
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    spacing: dp(5)
-                    padding: dp(10)
-
-                    MDBoxLayout:
-                        adaptive_height:True
-                        MDFlatButton:
-                            id: wapp_login_btn
-                            text: "WApp Login"
-                            theme_text_color: "Custom"
-                            text_color: 0, 0, 1, 1 
-                            on_release: root.wapp_login()
-                    MDBoxLayout:
-                        adaptive_height:True
-                        MDTextField:
-                            id: filename_field
-                            hint_text: 'Filename'
-                        
-                        MDIconButton:
-                            icon: 'magnify'
-                            on_release: root.wapp_search(filename_field.text)
-
-                                    
-                    MDBoxLayout:
-                        adaptive_height:True
-                        
-                        MDProgressBar:
-                            id: wapp_progress_bar
-                            value: 0 
-                            size_hint: .8,None 
-                            pos_hint: {"center_x":.5,"center_y":.5}
-                        
-                    ScrollView:
-                        MDList:
-                            id: files_items

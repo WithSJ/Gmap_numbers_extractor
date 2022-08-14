@@ -1,19 +1,18 @@
 import os
-
 from kivy.lang import Builder
 
 # Global Variables 
 FILENAME = str()
 REAGION = str()
-KEYWORDS = str()
+Filter = list()
 CODE = str()
 URL = str()
 SEARCH_ITEM = set()
 BackThread=None
 ListThread = None
 PROGRESS_VALUE = 0
-WAPP_PROGRESS_VALUE = 0
-WAPP_Driver = None
+isFileSaved = False
+
 
 def load_kv(file_name, file_path=os.path.join("libs", "uix", "kv")):
     """

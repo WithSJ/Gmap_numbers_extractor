@@ -8,11 +8,11 @@ from libs.applibs import utils,gmap_clear
 from time import sleep
 def driver_init():
     # Selenium Driver init
-    driver = webdriver.Firefox() 
+    driver = webdriver.Firefox(executable_path="Driver\\geckodriver.exe") 
     return driver
 
 def write_data(data1):
-    with open(f"{utils.FILENAME}_Gmap.csv","a") as csv_file:
+    with open(f"{utils.FILENAME}_Gmap.data","a") as csv_file:
         csv_file.write(f"{data1}\n")
 
 def scrape(site):
@@ -21,7 +21,6 @@ def scrape(site):
     for atag in siteHtml.find_all("span"):
         try:
             href = atag
-            print(href)
             write_data(href)
         except:
             continue
@@ -63,7 +62,7 @@ def start_scraping(driver,url):
             maxErr -= 1
             continue
     
-    driver.close()
+    
     gmap_clear.clean_data()
     gmap_clear.sort_data()
 
