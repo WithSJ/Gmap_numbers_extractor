@@ -1,3 +1,2 @@
 # GmapEXt-App 
-(currently in development)
-Chat Application for Android and Desktop (At present only for Linux System)
+Phone numbers thst listed on google map as shops or merchants 
